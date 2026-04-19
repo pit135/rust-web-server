@@ -1,4 +1,4 @@
-Commit 1 Reflection notes
+[Commit 1 Reflection notes]
 
 Pada tahap ini, saya buat server sederhana menggunakan Rust yang bisa terima koneksi dari browser dan membaca HTTP request yang dikirimkan. Saat server dijalankan pake cmd 'cargo run' dan browser mengakses `http://127.0.0.1:7878`, server terima beberapa request dan ditampilin di terminal
 
@@ -66,6 +66,22 @@ Tapi setelah menggunakan handle_connection, warning ini ga lagi menjadi masalah
 6. Kesimpulan
 - browser komunikasi dengan server menggunakan HTTP request
 - server baca request dalam bentuk teks
-- rust dapat digunakan untuk membuat server sederhana menggunakan TcpListener dan TcpStream
+- rust bisa digunakan untuk membuat server sederhana menggunakan TcpListener dan TcpStream
 - HTTP request terdiri dari beberapa baris yang diakhiri dengan baris kosong
-- satu kali akses browser ga selalu hasilin satu request aja
+- satu kali akses browser ga selalu hasilin satu request aja  
+  
+
+[Commit 2 Reflection notes]
+
+Pada milestone ini, saya belajar bagaimana web server sederhana di Rust bisa  mengembalikan (return) halaman HTML ke browser
+Fungsi handle_connection untuk tangani setiap koneksi yang masuk dari client (browser). Pertama, program baca HTTP request pake BufReader dan ambil baris-baris request sampai temukan baris kosong yang menandakan akhir header, selanjutnya, server buat response HTTP secara manual
+Response ini terdiri dari:
+- status line: HTTP/1.1 200 OK
+- header: Content-Length, yang menunjukkan panjang konten HTML
+- body: isi dari file hello.html  
+File HTML dibaca pake fs::read_to_string, lalu panjangnya diitung untuk dimasukkan ke header. Terakhir, response yang udah diformat dikirim lagi ke browser pake stream.write_all(). Browser lalu merender isi HTML tersebut sehingga bisa ditampilkan sebagai halaman web 
+
+Dari percobaan ini, saya memahami bahwa komunikasi antara browser dan server pake protokol HTTP, dan server harus mengirim response pake format yang benar supaya browser bisa nampilin dengan baik
+
+![commit 2 screen capture - terminal](images/terminal.png)
+![Commit 2 screen capture - browser (html)](images/browser.png)
