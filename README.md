@@ -91,4 +91,9 @@ Dari percobaan ini, saya memahami bahwa komunikasi antara browser dan server pak
 
 Pada milestone ini, saya mempelajari bagaimana server bisa validasi request dari client dan kasih response yang beda berdasarkan URL yang diminta. Server baca request line pertama dari HTTP request, kaya "GET / HTTP/1.1", trus pake struktur match untuk nentuin response yang sesuai, kalo client minta root ("/"), server mengembalikan file hello.html dengan status 200 OK, tapi kalo request ga dikenalin, server mengembalikan status 404 NOT FOUND beserta halaman error
 
-Proses ini ninjukin konsep routing sederhana pada web server, di mana server memetakan request tertentu ke response tertentu, refactoring dilakukan dengan memisahkan logika penentuan response (status dan file) dari proses pengiriman response, jadinya kode lebih rapi dan mudah dikembangkan. Saya juga memahami bahwa pemisahan ini penting supaya server bisa dengan mudah ditambahkan fitur baru seperti routing yang lebih kompleks di masa depan
+Proses ini ninjukin konsep routing sederhana pada web server, di mana server memetakan request tertentu ke response tertentu, refactoring dilakukan dengan memisahkan logika penentuan response (status dan file) dari proses pengiriman response, jadinya kode lebih rapi dan mudah dikembangkan. Saya juga memahami bahwa pemisahan ini penting supaya server bisa dengan mudah ditambahkan fitur baru seperti routing yang lebih kompleks di masa depan  
+
+[Commit 4 Reflection notes]
+
+Pada milestone ini, saya simulasikan kondisi server yang lambat dengan tambahkan endpoint /sleep yang akibatkan thread berhenti selama 10 detik sebelum berikan response. Dari percobaan ini, bisa diliat kalo saat satu request lagi diproses (misalnya /sleep), request lain harus nunggu hingga proses tersebut selesai, ini terjadi karena server berjalan secara single-threaded, jadinya cuma bisa tangani satu koneksi pada satu waktu
+Masalah ini nunjukin keterbatasan server sederhana, terutama kalau digunakan oleh banyak user secara bersamaan, jadinya, diperlukan pendekatan multithreading supaya server bisa menangani banyak request secara paralel tanpa saling nunggu
