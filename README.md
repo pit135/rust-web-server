@@ -101,4 +101,8 @@ Masalah ini nunjukin keterbatasan server sederhana, terutama kalau digunakan ole
 [Commit 5 Reflection notes]
 
 Pada milestone ini, saya mengimplementasikan multithreading pake ThreadPool untuk meningkatkan performa server, yang sebelumnya, server cuma bisa ttangani satu request dalam satu waktu, tapi dengan ThreadPool, setiap request yang masuk akan diproses dalam thread yang beda, sehingga server bisa menangani banyak request secara bersamaan
-ThreadPool bekerja dengan menyediakan sejumlah thread yang siap digunakan untuk jalankan task, dimana saat ada request baru, task tersebut akan diberikan ke salah satu thread tanpa harus buat thread baru setiap kali, dengan pendekatan ini, server menjadi lebih responsif dan scalable dibandingkan sebelumnya
+ThreadPool bekerja dengan menyediakan sejumlah thread yang siap digunakan untuk jalankan task, dimana saat ada request baru, task tersebut akan diberikan ke salah satu thread tanpa harus buat thread baru setiap kali, dengan pendekatan ini, server menjadi lebih responsif dan scalable dibandingkan sebelumnya   
+
+[Commit bonus Reflection notes]
+
+Pada bagian bonus ini, saya menambahkan fungsi build sebagai alternatif dari new untuk membuat ThreadPool, dimana fungsinya balikin result, jadinya memungkinkan validasi input, seperti memastikan ukuran thread ga nol. Pendekatan ini buat kode lebih aman dan ikut prinsip error handling di Rust, dengan refactoring ini, pembuatan ThreadPool jadi lebih fleksibel dan robust dibandingkan sebelumnya   
