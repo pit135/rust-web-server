@@ -96,4 +96,9 @@ Proses ini ninjukin konsep routing sederhana pada web server, di mana server mem
 [Commit 4 Reflection notes]
 
 Pada milestone ini, saya simulasikan kondisi server yang lambat dengan tambahkan endpoint /sleep yang akibatkan thread berhenti selama 10 detik sebelum berikan response. Dari percobaan ini, bisa diliat kalo saat satu request lagi diproses (misalnya /sleep), request lain harus nunggu hingga proses tersebut selesai, ini terjadi karena server berjalan secara single-threaded, jadinya cuma bisa tangani satu koneksi pada satu waktu
-Masalah ini nunjukin keterbatasan server sederhana, terutama kalau digunakan oleh banyak user secara bersamaan, jadinya, diperlukan pendekatan multithreading supaya server bisa menangani banyak request secara paralel tanpa saling nunggu
+Masalah ini nunjukin keterbatasan server sederhana, terutama kalau digunakan oleh banyak user secara bersamaan, jadinya, diperlukan pendekatan multithreading supaya server bisa menangani banyak request secara paralel tanpa saling nunggu  
+
+[Commit 5 Reflection notes]
+
+Pada milestone ini, saya mengimplementasikan multithreading pake ThreadPool untuk meningkatkan performa server, yang sebelumnya, server cuma bisa ttangani satu request dalam satu waktu, tapi dengan ThreadPool, setiap request yang masuk akan diproses dalam thread yang beda, sehingga server bisa menangani banyak request secara bersamaan
+ThreadPool bekerja dengan menyediakan sejumlah thread yang siap digunakan untuk jalankan task, dimana saat ada request baru, task tersebut akan diberikan ke salah satu thread tanpa harus buat thread baru setiap kali, dengan pendekatan ini, server menjadi lebih responsif dan scalable dibandingkan sebelumnya
