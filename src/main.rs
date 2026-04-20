@@ -17,11 +17,19 @@ fn handle_connection(mut stream: TcpStream) {
         .map(|result| result.unwrap())
         .take_while(|line| !line.is_empty())
         .collect();
+
+    let request_line = match http_request.get(0) {
+    Some(line) => line,
+    None => return,
+    };
     
     // status http
-    let status_line = "HTTP/1.1 200 OK";
-    // baca file html
-    let contents = fs::read_to_string("hello.html").unwrap();
+    let (status_line, filename) = match &request_line[..] {
+    "GET / HTTP/1.1" => ("HTTP/1.1 200 OK", "hello.html"),
+    _ => ("HTTP/1.1 404 NOT FOUND", "404.html"),
+    };
+
+    let contents = fs::read_to_string(filename).unwrap();
     // itung panjang content
     let length = contents.len();
     

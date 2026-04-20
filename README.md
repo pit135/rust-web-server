@@ -84,4 +84,11 @@ File HTML dibaca pake fs::read_to_string, lalu panjangnya diitung untuk dimasukk
 Dari percobaan ini, saya memahami bahwa komunikasi antara browser dan server pake protokol HTTP, dan server harus mengirim response pake format yang benar supaya browser bisa nampilin dengan baik
 
 ![commit 2 screen capture - terminal](images/terminal.png)
-![Commit 2 screen capture - browser (html)](images/browser.png)
+![Commit 2 screen capture - browser (html)](images/browser.png)  
+
+
+[Commit 3 Reflection notes]
+
+Pada milestone ini, saya mempelajari bagaimana server bisa validasi request dari client dan kasih response yang beda berdasarkan URL yang diminta. Server baca request line pertama dari HTTP request, kaya "GET / HTTP/1.1", trus pake struktur match untuk nentuin response yang sesuai, kalo client minta root ("/"), server mengembalikan file hello.html dengan status 200 OK, tapi kalo request ga dikenalin, server mengembalikan status 404 NOT FOUND beserta halaman error
+
+Proses ini ninjukin konsep routing sederhana pada web server, di mana server memetakan request tertentu ke response tertentu, refactoring dilakukan dengan memisahkan logika penentuan response (status dan file) dari proses pengiriman response, jadinya kode lebih rapi dan mudah dikembangkan. Saya juga memahami bahwa pemisahan ini penting supaya server bisa dengan mudah ditambahkan fitur baru seperti routing yang lebih kompleks di masa depan
